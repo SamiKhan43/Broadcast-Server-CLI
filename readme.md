@@ -2,7 +2,7 @@
 
 A multi-threaded TCP broadcast server with username support, built with Python using a clean modular architecture.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#features)
 - [Project Structure](#project-structure)
@@ -17,20 +17,20 @@ A multi-threaded TCP broadcast server with username support, built with Python u
 
 ---
 
-## ✨ Features
+## Features
 
-- ✅ **Multi-threaded server** - Handle multiple clients simultaneously
-- 👤 **Username support** - Clients can set custom usernames
-- 📡 **Real-time broadcasting** - Messages instantly sent to all connected clients
-- 🔒 **Thread-safe** - Uses locks to prevent race conditions
-- 🛡️ **Error handling** - Graceful handling of disconnections and errors
-- 🎯 **Modular design** - Clean separation of concerns
-- ⚙️ **Configurable** - Easy configuration through `config.py`
-- 🚀 **CLI interface** - Professional command-line interface
+- **Multi-threaded server** - Handle multiple clients simultaneously
+- **Username support** - Clients can set custom usernames
+- **Real-time broadcasting** - Messages instantly sent to all connected clients
+- **Thread-safe** - Uses locks to prevent race conditions
+- **Error handling** - Graceful handling of disconnections and errors
+- **Modular design** - Clean separation of concerns
+- **Configurable** - Easy configuration through `config.py`
+- **CLI interface** - Professional command-line interface
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 broadcast-server/
@@ -53,7 +53,7 @@ broadcast-server/
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 
@@ -78,7 +78,7 @@ That's it! No `pip install` needed.
 
 ---
 
-## ⚡ Quick Start
+## Quick Start
 
 ### Step 1: Start the Server
 
@@ -90,8 +90,8 @@ python main.py start
 
 You should see:
 ```
-🚀 Broadcast Server started on 127.0.0.1:5000
-📡 Waiting for clients to connect...
+Broadcast Server started on 127.0.0.1:5000
+Waiting for clients to connect...
 Press Ctrl+C to stop the server
 ```
 
@@ -140,17 +140,17 @@ Alice: Hello everyone!
 
 In Bob's terminal, type:
 ```
-Hi Alice! 👋
+Hi Alice!
 ```
 
 Alice will see:
 ```
-Bob: Hi Alice! 👋
+Bob: Hi Alice!
 ```
 
 ---
 
-## 📖 Usage
+## Usage
 
 ### Server Commands
 
@@ -209,43 +209,43 @@ python main.py connect --help
 
 ---
 
-## 🔍 How It Works
+## How It Works
 
 ### Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────┐
-│                    SERVER                        │
-│                                                 │
-│  Main Thread:          Handler Threads:         │
-│  ┌──────────────┐    ┌──────────────┐         │
-│  │ Accept new   │───▶│ Handle       │         │
-│  │ connections  │    │ Client 1     │         │
-│  └──────────────┘    └──────────────┘         │
-│                      ┌──────────────┐         │
-│                      │ Handle       │         │
-│                      │ Client 2     │         │
-│                      └──────────────┘         │
-│                                                 │
-│  Shared Data: clients = {socket: username}     │
-│  Protected by: clients_lock                    │
-└─────────────────────────────────────────────────┘
-                         │
-                         │ TCP Connections
-                         │
-              ┌──────────┴──────────┐
-              │                     │
-              ▼                     ▼
-        ┌──────────┐          ┌──────────┐
-        │ CLIENT 1 │          │ CLIENT 2 │
-        │  (Alice) │          │  (Bob)   │
-        │          │          │          │
-        │ Receiver │          │ Receiver │
-        │ Thread   │          │ Thread   │
-        │          │          │          │
-        │ Main     │          │ Main     │
-        │ Thread   │          │ Thread   │
-        └──────────┘          └──────────┘
++-------------------------------------------------+
+|                    SERVER                        |
+|                                                 |
+|  Main Thread:          Handler Threads:         |
+|  +--------------+    +--------------+          |
+|  | Accept new   |---->| Handle       |          |
+|  | connections  |    | Client 1     |          |
+|  +--------------+    +--------------+          |
+|                      +--------------+          |
+|                      | Handle       |          |
+|                      | Client 2     |          |
+|                      +--------------+          |
+|                                                 |
+|  Shared Data: clients = {socket: username}     |
+|  Protected by: clients_lock                    |
++-------------------------------------------------+
+                         |
+                         | TCP Connections
+                         |
+              +----------+-----------+
+              |                      |
+              v                      v
+        +----------+          +----------+
+        | CLIENT 1 |          | CLIENT 2 |
+        |  (Alice) |          |  (Bob)   |
+        |          |          |          |
+        | Receiver |          | Receiver |
+        | Thread   |          | Thread   |
+        |          |          |          |
+        | Main     |          | Main     |
+        | Thread   |          | Thread   |
+        +----------+          +----------+
 ```
 
 ### Message Flow
@@ -305,7 +305,7 @@ python main.py connect --help
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 Edit `config.py` to customize settings:
 
@@ -345,29 +345,29 @@ BUFFER_SIZE = 4096  # For larger messages
 
 ---
 
-## 📝 Examples
+## Examples
 
 ### Example 1: Basic Chat Session
 
 **Server Terminal:**
 ```
 $ python main.py start
-🚀 Broadcast Server started on 127.0.0.1:5000
-📡 Waiting for clients to connect...
+Broadcast Server started on 127.0.0.1:5000
+Waiting for clients to connect...
 
-✅ New connection from ('127.0.0.1', 54321)
-👥 Total clients: 1
-🔄 Started handler for ('127.0.0.1', 54321)
-📝 Client set name: Alice
+New connection from ('127.0.0.1', 54321)
+Total clients: 1
+Started handler for ('127.0.0.1', 54321)
+Client set name: Alice
 
-✅ New connection from ('127.0.0.1', 54322)
-👥 Total clients: 2
-🔄 Started handler for ('127.0.0.1', 54322)
-📝 Client set name: Bob
+New connection from ('127.0.0.1', 54322)
+Total clients: 2
+Started handler for ('127.0.0.1', 54322)
+Client set name: Bob
 
-📨 Alice: Hey Bob!
-📨 Bob: Hi Alice! How are you?
-📨 Alice: Great! This server is working perfectly 🎉
+Alice: Hey Bob!
+Bob: Hi Alice! How are you?
+Alice: Great! This server is working perfectly
 ```
 
 **Alice's Terminal:**
@@ -378,10 +378,10 @@ Connected to 127.0.0.1:5000
 You are chatting as: Alice
 Type messages and press Enter. Type '/quit' to disconnect.
 Welcome, Alice! You are now connected.
-📢 Bob has joined the chat!
+Bob has joined the chat!
 Hey Bob!
 Bob: Hi Alice! How are you?
-Great! This server is working perfectly 🎉
+Great! This server is working perfectly
 ```
 
 **Bob's Terminal:**
@@ -394,7 +394,7 @@ Type messages and press Enter. Type '/quit' to disconnect.
 Welcome, Bob! You are now connected.
 Alice: Hey Bob!
 Hi Alice! How are you?
-Alice: Great! This server is working perfectly 🎉
+Alice: Great! This server is working perfectly
 ```
 
 ### Example 2: Multiple Clients
@@ -433,14 +433,14 @@ Disconnected
 
 **Alice sees:**
 ```
-📢 Bob has left the chat.
+Bob has left the chat.
 ```
 
 **Server logs:**
 ```
-👋 Bob disconnected
-🧹 Cleaned up Bob
-👥 Remaining clients: 2
+Bob disconnected
+Cleaned up Bob
+Remaining clients: 2
 ```
 
 ### Example 4: Custom Port
@@ -478,7 +478,7 @@ python main.py connect --host 192.168.1.100 --port 5000
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Problem: "Failed to connect" Error
 
@@ -533,7 +533,7 @@ python main.py start --port 5001
 **Symptoms:** Type message but nothing happens
 
 **Debugging:**
-1. Check server terminal - do you see "📨 Username: message"?
+1. Check server terminal - do you see "Username: message"?
 2. If yes: Problem is in broadcasting
 3. If no: Problem is in receiving
 
@@ -585,7 +585,7 @@ MAX_CLIENTS = 200
 
 ---
 
-## 🎓 Advanced Usage
+## Advanced Usage
 
 ### Running on Different Networks
 
@@ -695,10 +695,10 @@ logging.info(f"New connection from {client_address}")
 ### Security Considerations
 
 **Current Implementation:**
-- ❌ No encryption (messages sent in plain text)
-- ❌ No authentication (anyone can connect)
-- ❌ No rate limiting (vulnerable to spam)
-- ❌ No input validation (vulnerable to malformed messages)
+- No encryption (messages sent in plain text)
+- No authentication (anyone can connect)
+- No rate limiting (vulnerable to spam)
+- No input validation (vulnerable to malformed messages)
 
 **For Production Use, Add:**
 1. **TLS/SSL encryption** using `ssl` module
@@ -710,7 +710,7 @@ logging.info(f"New connection from {client_address}")
 
 ---
 
-## 🔧 Extending the Server
+## Extending the Server
 
 ### Add Commands
 
@@ -772,7 +772,7 @@ if buffer.startswith("/join "):
 
 ---
 
-## 📚 Code Documentation
+## Code Documentation
 
 ### `config.py`
 
@@ -833,7 +833,7 @@ Client implementation for connecting to server.
 
 ---
 
-## 🤝 Contributing Ideas
+## Contributing Ideas
 
 Want to improve this? Here are enhancement ideas:
 
@@ -867,13 +867,13 @@ Want to improve this? Here are enhancement ideas:
 
 ---
 
-## 📜 License
+## License
 
 This is educational code - free to use, modify, and learn from!
 
 ---
 
-## ❓ FAQ
+## FAQ
 
 **Q: Can multiple clients have the same username?**  
 A: Yes, currently there's no uniqueness check. You could add this in `handle_client()`.
@@ -901,7 +901,7 @@ A: Yes! Use port forwarding on your router. See "Advanced Usage" section.
 
 ---
 
-## 🎯 Testing Checklist
+## Testing Checklist
 
 Test your implementation:
 
@@ -920,7 +920,7 @@ Test your implementation:
 
 ---
 
-## 📞 Support
+## Support
 
 Having issues? Here's how to debug:
 
@@ -931,8 +931,7 @@ Having issues? Here's how to debug:
 5. **Check firewall:** Temporarily disable to test
 
 ---
+
 [roadmap.sh](https://roadmap.sh/projects/broadcast-server)
 
-**Happy Broadcasting! 📡**
 
-Made with ❤️ for learning network programming
